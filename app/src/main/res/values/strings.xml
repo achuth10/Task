@@ -6,4 +6,9 @@
     <string name="Login">Login</string>
     <string name="welc">Welcome page</string>
     <string name="log_out">Log out</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="membership_plans">Membership plans</string>
+    <string name="my_account">My account</string>
+    <string name="Open">Open navigation drawer</string>
+    <string name="close">Close navigation drawer</string>
 </resources>
