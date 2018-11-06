@@ -11,4 +11,5 @@
     <string name="my_account">My account</string>
     <string name="Open">Open navigation drawer</string>
     <string name="close">Close navigation drawer</string>
+    <string name="Streamer_text">Audio/VideoStreamer</string>
 </resources>

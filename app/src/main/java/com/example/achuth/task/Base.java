@@ -2,6 +2,7 @@ package com.example.achuth.task;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 public class Base extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private boolean open=false;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navview;
@@ -30,6 +32,7 @@ public class Base extends AppCompatActivity {
     private Dashboard dashboard;
     private Membership membership;
     private Account account;
+    private boolean doublebackpress=false;
     private FrameLayout mainframe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,6 @@ public class Base extends AppCompatActivity {
         setfragement(dashboard);
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        mainframe=(FrameLayout)findViewById(R.id.content_frame);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -83,6 +85,27 @@ public class Base extends AppCompatActivity {
         fragmentTransaction.replace(R.id.content_frame, frag);
         fragmentTransaction.commit();
     }
+    public void onBackPressed() {
+
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            Toast.makeText(this, "Press again to log out", Toast.LENGTH_LONG).show();
+            if (doublebackpress) {
+                editor.clear();
+                editor.commit();
+                doublebackpress=false;
+                super.onBackPressed();
+            }
+        }
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doublebackpress=false;
+            }
+        }, 2000);
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
@@ -97,9 +120,18 @@ public class Base extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            default:
+                if(!open) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                    open=true;
+                    return true;
+                }
+                else if(open)
+                {
+                   open=false;
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                }
+                default:
                 return super.onOptionsItemSelected(item);
 
         }
