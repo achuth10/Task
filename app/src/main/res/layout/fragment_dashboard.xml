@@ -33,7 +33,7 @@
             android:layout_toEndOf="@id/audiostreamercheck"
             android:checked="true"
             android:gravity="center"
-            android:text="Video Streamer" />
+            android:text="Video Streamer " />
 
 
         <android.support.v7.widget.RecyclerView
