@@ -15,7 +15,7 @@ public class StreamerAdapter extends RecyclerView.Adapter<StreamerHolder> {
     private ArrayList<Streamer> streamers;
 
 
-public StreamerAdapter(Context context, ArrayList < Streamer > streamers) {
+StreamerAdapter(Context context, ArrayList<Streamer> streamers) {
         this.context = context;
             this.streamers = streamers;
 

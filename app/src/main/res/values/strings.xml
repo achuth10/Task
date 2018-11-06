@@ -12,4 +12,7 @@
     <string name="Open">Open navigation drawer</string>
     <string name="close">Close navigation drawer</string>
     <string name="Streamer_text">Audio/VideoStreamer</string>
+    <string name="sort_according_to">Sort according to :</string>
+    <string name="audio_streamer">Audio Streamer</string>
+    <string name="video_streamer">Video Streamer</string>
 </resources>

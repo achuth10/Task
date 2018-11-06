@@ -32,7 +32,7 @@ public class Base extends AppCompatActivity {
     private Dashboard dashboard;
     private Membership membership;
     private Account account;
-    private boolean doublebackpress=false;
+    private int count=0;
     private FrameLayout mainframe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +90,10 @@ public class Base extends AppCompatActivity {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Toast.makeText(this, "Press again to log out", Toast.LENGTH_LONG).show();
-            if (doublebackpress) {
+            Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
+            if (++count==2) {
                 editor.clear();
                 editor.commit();
-                doublebackpress=false;
                 super.onBackPressed();
             }
         }
@@ -102,7 +101,7 @@ public class Base extends AppCompatActivity {
 
             @Override
             public void run() {
-                doublebackpress=false;
+                count=0;
             }
         }, 2000);
     }
