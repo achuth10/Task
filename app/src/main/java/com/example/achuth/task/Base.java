@@ -91,7 +91,7 @@ public class Base extends AppCompatActivity {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
-            if (++count==2) {
+            if (++count>=2) {
                 editor.clear();
                 editor.commit();
                 super.onBackPressed();

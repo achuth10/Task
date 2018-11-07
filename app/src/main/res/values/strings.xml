@@ -15,4 +15,6 @@
     <string name="sort_according_to">Sort according to :</string>
     <string name="audio_streamer">Audio Streamer</string>
     <string name="video_streamer">Video Streamer</string>
+    <string name="upgrade_to_premium">Upgrade to Premium</string>
+    <string name="premmem">Premium Membership</string>
 </resources>

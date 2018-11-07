@@ -4,19 +4,216 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Membership"
-    android:background="@color/colorAccent"
+
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/PremiumTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/upgrade_to_premium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/PremiumTxt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/PremiumTxt"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="@string/premmem"
+            android:textColor="#000000"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/PremiumTxt1"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="The premium membership includes unlimited Adfree access to your favourite streamers"
+            android:textColor="#000000"
+            android:textSize="@dimen/_10sdp" />
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/memebeclose"
+            android:layout_below="@id/PremiumTxt1"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/livstream" />
+
+        <LinearLayout
+            android:id="@+id/memebeclose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:layout_above="@id/upgrade"
+            android:orientation="horizontal"
+            android:padding="@dimen/_4sdp">
+
+            <LinearLayout
+                android:id="@+id/mem3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="3"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_40sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="Months"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:text="50 Rs "
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/mem12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="12"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_40sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="Months"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:text="39 Rs"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:text="Monthly"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mem6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="6"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_40sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="Months"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:text="45 Rs"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_15sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/upgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button1"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Membership Plans" />
+            android:text="Upgrade Now"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_40sdp" />
+
+
     </RelativeLayout>
 
 </FrameLayout>
