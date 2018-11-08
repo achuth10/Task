@@ -3,15 +3,11 @@
     <item
         android:id="@+id/nav_dash"
         android:title="@string/dashboard"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@drawable/dash"/>
     <item
         android:id="@+id/nav_memb"
         android:title="@string/membership_plans"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/member"
         />
-    <item
-        android:id="@+id/nav_account"
-        android:icon="@mipmap/ic_launcher"
-        android:title="@string/my_account" />
 
 </menu>

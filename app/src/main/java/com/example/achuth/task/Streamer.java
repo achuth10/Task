@@ -2,16 +2,17 @@ package com.example.achuth.task;
 
 public class Streamer {
     private String name,genre;
-    private int age;
+    private int age,dpid;
     private boolean vstreamer,astreamer;
 
-    Streamer(String name,String genre,int age,boolean vs,boolean as)
+    Streamer(String name,String genre,int age,boolean vs,boolean as,int dpid)
     {
         this.name=name;
         this.genre=genre;
         this.age=age;
         vstreamer=vs;
         astreamer=as;
+        this.dpid=dpid;
     }
 
     public void setName(String name) {
@@ -24,6 +25,14 @@ public class Streamer {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getDpid() {
+        return dpid;
+    }
+
+    public void setDpid(int dpid) {
+        this.dpid = dpid;
     }
 
     public void setAstreamer(boolean astreamer) {

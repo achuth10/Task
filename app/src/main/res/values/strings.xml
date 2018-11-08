@@ -12,9 +12,9 @@
     <string name="Open">Open navigation drawer</string>
     <string name="close">Close navigation drawer</string>
     <string name="Streamer_text">Audio/VideoStreamer</string>
-    <string name="sort_according_to">Sort according to :</string>
-    <string name="audio_streamer">Audio Streamer</string>
-    <string name="video_streamer">Video Streamer</string>
+    <string name="sort_according_to">Filter:</string>
+    <string name="audio_streamer">Audio</string>
+    <string name="video_streamer">Video</string>
     <string name="upgrade_to_premium">Upgrade to Premium</string>
     <string name="premmem">Premium Membership</string>
 </resources>

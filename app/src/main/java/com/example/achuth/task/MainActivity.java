@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         boolean logincheck=false;
         private final String email="abc123";
         SharedPreferences sharedPreferences;
-        @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-             login=(Button)findViewById(R.id.loginbutton);
-             loginid=(EditText)findViewById(R.id.getemail);
-             password=(EditText)findViewById(R.id.getpassword);
+             login= findViewById(R.id.loginbutton);
+             loginid= findViewById(R.id.getemail);
+             password= findViewById(R.id.getpassword);
              sharedPreferences=getApplicationContext().getSharedPreferences("A",0);
              final SharedPreferences.Editor editor= sharedPreferences.edit();
              if(sharedPreferences.contains(email1)) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                  loginid.setText(sharedPreferences.getString(email1, ""));
              }
              login.setOnClickListener(new View.OnClickListener() {
-            @Override
+
 
             public void onClick(View v) {
 

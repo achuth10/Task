@@ -28,15 +28,10 @@ Button upgrade;
 String mem;
 boolean mem3m,mem6m,mem12m;
 
-    public Membership() {
-        // Required empty public constructor
-    }
-
-
-    @Override
+@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v= inflater.inflate(R.layout.fragment_membership, container, false);
     mem3=v.findViewById(R.id.mem3);
     mem6=v.findViewById(R.id.mem6);
@@ -54,7 +49,7 @@ boolean mem3m,mem6m,mem12m;
         }
     });
         mem6.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 mem6.setBackgroundResource(R.drawable.selectedoption);
                 mem3m=false;mem6m=true;mem12m=false;

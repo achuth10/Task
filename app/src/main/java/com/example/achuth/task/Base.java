@@ -31,7 +31,6 @@ public class Base extends AppCompatActivity {
     private Toolbar myToolbar;
     private Dashboard dashboard;
     private Membership membership;
-    private Account account;
     private int count=0;
     private FrameLayout mainframe;
     @Override
@@ -42,17 +41,16 @@ public class Base extends AppCompatActivity {
         editor = sharedPreferences.edit();
         dashboard=new Dashboard();
         membership =new Membership();
-        account=new Account();
         setfragement(dashboard);
-        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        navview = (NavigationView) findViewById(R.id.nav_view);
+        navview = findViewById(R.id.nav_view);
         navview.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -60,15 +58,9 @@ public class Base extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.nav_dash:
-                        Toast.makeText(Base.this, "Dashboard", Toast.LENGTH_SHORT).show();
                         setfragement(dashboard);
                         return true;
-                    case R.id.nav_account:
-                        Toast.makeText(Base.this, "My Account", Toast.LENGTH_SHORT).show();
-                        setfragement(account);
-                        return true;
                     case R.id.nav_memb:
-                        Toast.makeText(Base.this, "Membership plans", Toast.LENGTH_SHORT).show();
                         setfragement(membership);
                         return true;
                     default:
@@ -82,6 +74,7 @@ public class Base extends AppCompatActivity {
     }
     private void setfragement(Fragment frag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.content_frame, frag);
         fragmentTransaction.commit();
     }

@@ -8,26 +8,28 @@
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:gravity="bottom"
-    android:padding="16dp"
+    android:padding="@dimen/_5sdp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <ImageView
+        android:id="@+id/dp"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:paddingTop="@dimen/_20sdp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/account" />
     <TextView
         android:id="@+id/logininfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Placeholder"
+        android:layout_below="@id/dp"
+        android:text="John Doe"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_10sdp"
         android:textColor="#000000"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_20sdp"
         />
-
-    <ImageView
-        android:id="@+id/dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_30sdp"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher" />
 
 
 

@@ -22,11 +22,8 @@ public class Dashboard extends Fragment {
     private RecyclerView recyclerView;
     private CheckBox asbox,vsbox;
     private StreamerAdapter adapter;
-    private boolean assort=false,vssort=false;
-    String value;
     public ArrayList<Streamer> tempas,tempvs,temp;
     public ArrayList<Streamer> StreamerArrayList;
-    private Switch aSwitch;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -87,44 +84,59 @@ public class Dashboard extends Fragment {
     }
 
     public void createdata() {
-        Streamer streamer = new Streamer("Name", "Esports", 22, true, true);
+        Streamer streamer = new Streamer("Name", "Esports", 22, true, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 22, true, false);
+        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 24, false, true);
+        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 18, true, false);
+        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
         StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 22, true, false);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 24, false, true);
+        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 18, true, false);
+        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 32, true, true);
+        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 26, false, true);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 32, true, true);
+        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 26, false, true);
+        streamer = new Streamer("Name", "Esports", 26, false, true,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+        streamer = new Streamer("Name", "Esports", 22, true, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 22, true, true);
+        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 28, false, true);
+        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
-        streamer = new Streamer("Name", "Esports", 20, true, false);
+        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+
+        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+
+        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+
+        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+
+        streamer = new Streamer("Name", "Esports", 26, false, true,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
+        StreamerArrayList.add(streamer);
+        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
         StreamerArrayList.add(streamer);
 
         adapter.notifyDataSetChanged();
