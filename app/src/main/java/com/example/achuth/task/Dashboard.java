@@ -16,6 +16,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Dashboard extends Fragment {
 
@@ -82,62 +83,19 @@ public class Dashboard extends Fragment {
         });
         return v;
     }
+    public boolean setstreamer(int a)
+    {
+        return a == 1;
+    }
+
 
     public void createdata() {
-        Streamer streamer = new Streamer("Name", "Esports", 22, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 26, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 22, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 22, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 24, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 18, true, false,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-
-        streamer = new Streamer("Name", "Esports", 26, false, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
-        streamer = new Streamer("Name", "Esports", 32, true, true,R.drawable.blank);
-        StreamerArrayList.add(streamer);
+        Random ranum=new Random();
+        for(int i=0;i<20;i++)
+        {
+            Streamer streamer = new Streamer("Name", "Esports", 18+ranum.nextInt(20), setstreamer((int)Math.round(Math.random())), setstreamer((int)Math.round(Math.random())),R.drawable.blank);
+            StreamerArrayList.add(streamer);
+        }
 
         adapter.notifyDataSetChanged();
     }
