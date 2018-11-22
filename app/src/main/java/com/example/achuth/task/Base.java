@@ -75,8 +75,7 @@ public class Base extends AppCompatActivity {
     private void setfragement(Fragment frag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        fragmentTransaction.replace(R.id.content_frame, frag);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.content_frame, frag).commit();
     }
     public void onBackPressed() {
 
@@ -108,6 +107,7 @@ public class Base extends AppCompatActivity {
             case R.id.logout_action:
                 editor.clear();
                 editor.commit();
+                getSupportFragmentManager().popBackStack();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 return true;
