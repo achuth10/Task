@@ -17,12 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 public class MainActivity extends AppCompatActivity {
         private Button login;
         private EditText loginid,password;
-        private final String pass="abc123";
         private boolean logincheck=false,fraginplace=false;
-        private final String email="abc123";
         private SharedPreferences sharedPreferences;
         private RelativeLayout relativeLayout;
         private AnimationDrawable animationDrawable;
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         private FragmentManager fragman;
         private TextView signup;
         private  User user;
+        private Gson gson;
+        private String storeduser;
 
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         signup=(TextView)findViewById(R.id.signup);
         signUpFragment =new SignUpFragment();
         user=new User();
+        gson=new Gson();
         fragman=getSupportFragmentManager();
         //code for animation transition
         relativeLayout = (RelativeLayout) findViewById(R.id.mainframe);
@@ -52,33 +55,38 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
 
+             //code to check whether to sign in or not based on stored data and logout/back action
 
-             //code to automatically sign in /fill username
-
-             sharedPreferences=getApplicationContext().getSharedPreferences("A",0);
-             final SharedPreferences.Editor editor= sharedPreferences.edit();
-             if(sharedPreferences.contains("Login")) {
-                 if(sharedPreferences.contains("Password"))
+             sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
+              final SharedPreferences.Editor editor= sharedPreferences.edit();
+             if(sharedPreferences.getString("UserDetail",null)!=null) {
+                 storeduser = sharedPreferences.getString("UserDetail", null);
+                 if (storeduser != null)
                  {
-                     logincheck=true;
-                     changepage();
+                     user = gson.fromJson(storeduser, User.class);
+                             if (user != null)
+                             {
+                                 System.out.println("ON first start " +sharedPreferences.getString("Login",null));
+                                 if(sharedPreferences.getString("Login",null).equals("YES"))
+                                 {
+                                     logincheck = true;
+                                     changepage();
+                                 }
+                             }
+
                  }
-                 else
-                 loginid.setText(sharedPreferences.getString("Login", ""));
+
              }
-
-
              login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 String logintest = loginid.getText().toString(), passtest = password.getText().toString();
                 if (logintest.length() > 0 && passtest.length() > 0)
                 {
-                    editor.putString("Login", logintest).apply();
-                if (logintest.equals(email)) {
-                    if ((passtest.equals(pass))) {
+                if (logintest.equals(user.getLoginId())) {
+
+                    if ((passtest.equals(user.getPassword()))) {
                         logincheck = true;
-                        editor.putString("Password", passtest).apply();
                         changepage();
 
                     } else {
@@ -106,9 +114,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void changepage() {
         if (logincheck) {
+            final SharedPreferences.Editor editor= sharedPreferences.edit();
+            editor.putString("Login","YES").apply();
             Intent i = new Intent(this, Base.class);
             startActivity(i);
-            Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logged in successfully as " + user.getFirstName() + " " + user.getLastName(), Toast.LENGTH_SHORT).show();
         }
 
         else

@@ -61,7 +61,8 @@ public class SignUpUser extends AppCompatActivity {
                     user.setLoginId(email.getText().toString());
                     user.setPassword(pass.getText().toString());
                     editor.putString("UserDetail",gson.toJson(user)).apply();
-                    Toast.makeText(getApplication(),"Account created successfully",Toast.LENGTH_SHORT).show();
+                    editor.putString("Login","YES").apply();
+                    Toast.makeText(getApplication(),"Account created successfully ",Toast.LENGTH_SHORT).show();
                     changepage();
                 }
             }

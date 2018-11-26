@@ -17,14 +17,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 
 public class Base extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private boolean open=false;
+    private TextView name;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navview;
@@ -32,13 +37,18 @@ public class Base extends AppCompatActivity {
     private Dashboard dashboard;
     private Membership membership;
     private int count=0;
+    private User user;
+    private Gson gson;
+    private String storeduser;
     private FrameLayout mainframe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        sharedPreferences = getApplicationContext().getSharedPreferences("A", 0);
-        editor = sharedPreferences.edit();
+        sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
+        editor= sharedPreferences.edit();
+
+
         dashboard=new Dashboard();
         membership =new Membership();
         setfragement(dashboard);
@@ -51,6 +61,18 @@ public class Base extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         navview = findViewById(R.id.nav_view);
+        gson=new Gson();
+        if(sharedPreferences.getString("UserDetail",null)!=null) {
+            storeduser = sharedPreferences.getString("UserDetail", null);
+            System.out.println(storeduser);
+            User temp=gson.fromJson(storeduser,User.class);
+            user = gson.fromJson(storeduser, User.class);
+            if (temp != null) {
+                View headerView = navview.getHeaderView(0);
+                name = (TextView) headerView.findViewById(R.id.logininfo);
+                name.setText(temp.getFirstName() + " " + temp.getLastName());
+            }
+        }
         navview.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -71,6 +93,7 @@ public class Base extends AppCompatActivity {
             }
         });
 
+
     }
     private void setfragement(Fragment frag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -84,8 +107,9 @@ public class Base extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
             if (++count>=2) {
-                editor.clear();
-                editor.commit();
+//                editor.clear();
+//                editor.commit();
+                editor.putString("Login","NO").commit();
                 super.onBackPressed();
             }
         }
@@ -105,9 +129,9 @@ public class Base extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout_action:
-                editor.clear();
-                editor.commit();
-                getSupportFragmentManager().popBackStack();
+//                editor.clear();
+//                editor.commit();
+                editor.putString("Login","NO").commit();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 return true;
