@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         private SignUpFragment signUpFragment ;
         private FragmentManager fragman;
         private TextView signup;
+        private  User user;
 
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         login= findViewById(R.id.loginbutton);
         signup=(TextView)findViewById(R.id.signup);
         signUpFragment =new SignUpFragment();
+        user=new User();
         fragman=getSupportFragmentManager();
         //code for animation transition
         relativeLayout = (RelativeLayout) findViewById(R.id.mainframe);
