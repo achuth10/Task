@@ -28,6 +28,7 @@ public class Dashboard extends Fragment {
     public ArrayList<Streamer> tempas,tempvs,temp;
     public ArrayList<Streamer> StreamerArrayList;
     private ImageView menu;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -41,7 +42,7 @@ public class Dashboard extends Fragment {
         tempvs=new ArrayList<>();
         asbox.setChecked(false);
         vsbox.setChecked(false);
-        menu=(ImageView)v.findViewById(R.id.menubutton);
+        menu=(ImageView)v.findViewById(R.id.streammenu);
         setAdapter(StreamerArrayList);
         createdata();
         sort();
@@ -85,12 +86,6 @@ public class Dashboard extends Fragment {
                 }
             }
         });
-//        menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(),"Tester",Toast.LENGTH_SHORT).show();
-//            }
-//        });
         return v;
     }
     public boolean setstreamer(int a)
@@ -133,6 +128,7 @@ public class Dashboard extends Fragment {
         adapter = new StreamerAdapter(this.getContext(), streamers);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
         recyclerView.setAdapter(adapter);
+
     }
 
 }

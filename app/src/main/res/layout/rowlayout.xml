@@ -24,7 +24,7 @@ app:cardElevation="6dp"
             android:layout_height="@dimen/_140sdp"
             android:src="@drawable/blank"/>
         <ImageView
-            android:id="@+id/menubutton"
+            android:id="@+id/streammenu"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="end"
