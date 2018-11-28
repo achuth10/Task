@@ -3,13 +3,11 @@ package com.example.achuth.task;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         user=new User();
         gson=new Gson();
         fragman=getSupportFragmentManager();
+
         //code for animation transition
         relativeLayout = (RelativeLayout) findViewById(R.id.mainframe);
         animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                      user = gson.fromJson(storeduser, User.class);
                              if (user != null)
                              {
-                                 System.out.println("ON first start " +sharedPreferences.getString("Login",null));
                                  if(sharedPreferences.getString("Login",null).equals("YES"))
                                  {
                                      logincheck = true;
@@ -116,7 +114,11 @@ public class MainActivity extends AppCompatActivity {
         if (logincheck) {
             final SharedPreferences.Editor editor= sharedPreferences.edit();
             editor.putString("Login","YES").apply();
-            Intent i = new Intent(this, Base.class);
+            Intent i;
+            if(user.isUser())
+                i= new Intent(this, Base.class);
+            else
+                i=new Intent(this,BroadcasterMain.class);
             startActivity(i);
             Toast.makeText(this, "Logged in successfully as " + user.getFirstName() + " " + user.getLastName(), Toast.LENGTH_SHORT).show();
         }

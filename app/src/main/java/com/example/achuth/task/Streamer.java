@@ -3,7 +3,7 @@ package com.example.achuth.task;
 public class Streamer {
     private String name,genre;
     private int age,dpid;
-    private boolean vstreamer,astreamer;
+    private boolean vstreamer,astreamer,blocked;
 
     Streamer(String name,String genre,int age,boolean vs,boolean as,int dpid)
     {
@@ -12,6 +12,7 @@ public class Streamer {
         this.age=age;
         vstreamer=vs;
         astreamer=as;
+        blocked=false;
         this.dpid=dpid;
     }
 
@@ -61,5 +62,13 @@ public class Streamer {
 
     public boolean isVstreamer() {
         return vstreamer;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

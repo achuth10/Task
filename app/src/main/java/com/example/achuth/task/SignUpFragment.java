@@ -23,6 +23,7 @@ private Button user,broadcaster;
         View v= inflater.inflate(R.layout.fragment_sign_up, container, false);
         close=v.findViewById(R.id.close);
         fragman=getFragmentManager();
+        broadcaster=(Button)v.findViewById(R.id.caster);
         user=(Button)v.findViewById(R.id.userselect);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +39,15 @@ private Button user,broadcaster;
             @Override
             public void onClick(View v) {
                 Intent i =new Intent(getContext(),SignUpUser.class);
+                i.putExtra("Buttonpressed",2);
+                startActivity(i);
+            }
+        });
+        broadcaster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(getContext(),SignUpUser.class);
+                i.putExtra("Buttonpressed",1);
                 startActivity(i);
             }
         });

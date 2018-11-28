@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Base" />
-        <activity android:name=".SignUpUser"></activity>
+        <activity android:name=".SignUpUser" />
+        <activity android:name=".BroadcasterMain"></activity>
     </application>
 
 </manifest>

@@ -2,9 +2,10 @@ package com.example.achuth.task;
 
 public class User {
     private String uuid,firstName,lastName,loginId,password;
+    private boolean isUser;
     User()
     {
-        uuid=firstName=lastName=loginId=password=" ";
+        uuid=firstName=lastName=loginId=password=" ";isUser=true;
     }
 
     public String getFirstName() {
@@ -47,4 +48,11 @@ public class User {
         this.uuid = uuid;
     }
 
+    public void setUser(boolean user) {
+        isUser = user;
+    }
+
+    public boolean isUser() {
+        return isUser;
+    }
 }

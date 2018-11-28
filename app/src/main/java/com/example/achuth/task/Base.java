@@ -107,8 +107,6 @@ public class Base extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
             if (++count>=2) {
-//                editor.clear();
-//                editor.commit();
                 editor.putString("Login","NO").commit();
                 super.onBackPressed();
             }
@@ -129,8 +127,6 @@ public class Base extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout_action:
-//                editor.clear();
-//                editor.commit();
                 editor.putString("Login","NO").commit();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);

@@ -10,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class Dashboard extends Fragment {
     private StreamerAdapter adapter;
     public ArrayList<Streamer> tempas,tempvs,temp;
     public ArrayList<Streamer> StreamerArrayList;
+    private ImageView menu;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -38,6 +41,7 @@ public class Dashboard extends Fragment {
         tempvs=new ArrayList<>();
         asbox.setChecked(false);
         vsbox.setChecked(false);
+        menu=(ImageView)v.findViewById(R.id.menubutton);
         setAdapter(StreamerArrayList);
         createdata();
         sort();
@@ -81,6 +85,12 @@ public class Dashboard extends Fragment {
                 }
             }
         });
+//        menu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(),"Tester",Toast.LENGTH_SHORT).show();
+//            }
+//        });
         return v;
     }
     public boolean setstreamer(int a)
@@ -96,7 +106,6 @@ public class Dashboard extends Fragment {
             Streamer streamer = new Streamer("Name", "Esports", 18+ranum.nextInt(20), setstreamer((int)Math.round(Math.random())), setstreamer((int)Math.round(Math.random())),R.drawable.blank);
             StreamerArrayList.add(streamer);
         }
-
         adapter.notifyDataSetChanged();
     }
 

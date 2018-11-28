@@ -17,6 +17,7 @@ public class SignUpUser extends AppCompatActivity {
     private User user;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private int pressbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +30,16 @@ public class SignUpUser extends AppCompatActivity {
         passConfirm=(EditText)findViewById(R.id.getpassconfirm);
         user=new User();
         gson=new Gson();
+        pressbutton=getIntent().getIntExtra("Buttonpressed",0);
         firstName=(EditText)findViewById(R.id.getfirstname);
         lastname=(EditText)findViewById(R.id.getlastname);
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(pressbutton);
+                if(pressbutton!=2)
+                    Toast.makeText(getApplication(),"Broadcaster clicked",Toast.LENGTH_SHORT).show();
                 if(email.getText().toString().length()==0)
                 {
                     Toast.makeText(getApplication(),"Enter a valid email id",Toast.LENGTH_SHORT).show();
@@ -60,6 +66,12 @@ public class SignUpUser extends AppCompatActivity {
                     user.setLastName(lastname.getText().toString());
                     user.setLoginId(email.getText().toString());
                     user.setPassword(pass.getText().toString());
+                    if(pressbutton==2)
+                        user.setUser(true);
+                    else {
+                        user.setUser(false);
+
+                    }
                     editor.putString("UserDetail",gson.toJson(user)).apply();
                     editor.putString("Login","YES").apply();
                     Toast.makeText(getApplication(),"Account created successfully ",Toast.LENGTH_SHORT).show();
@@ -70,7 +82,11 @@ public class SignUpUser extends AppCompatActivity {
     }
     private void changepage()
     {
-        Intent i = new Intent(this, Base.class);
+        Intent i;
+        if(pressbutton==2)
+         i= new Intent(this, Base.class);
+        else
+            i= new Intent(this, BroadcasterMain.class);
         startActivity(i);
     }
 

@@ -15,12 +15,21 @@ app:cardElevation="6dp"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="@dimen/_4sdp">
-    <ImageView
-        android:layout_width="@dimen/_140sdp"
-        android:id="@+id/icon1"
-        android:layout_height="@dimen/_140sdp"
-        android:src="@drawable/blank"
-        />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="@dimen/_140sdp"
+            android:id="@+id/icon1"
+            android:layout_height="@dimen/_140sdp"
+            android:src="@drawable/blank"/>
+        <ImageView
+            android:id="@+id/menubutton"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="end"
+            android:src="@drawable/menuicon" />
+    </FrameLayout>
     <TextView
         android:id="@+id/Name"
         android:layout_width="match_parent"
