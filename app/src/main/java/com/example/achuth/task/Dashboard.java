@@ -45,23 +45,28 @@ public class Dashboard extends Fragment {
         menu=(ImageView)v.findViewById(R.id.streammenu);
         setAdapter(StreamerArrayList);
         createdata();
-        sort();
+
         asbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sort();
                 if (asbox.isChecked() && !vsbox.isChecked()) {
+                    adapter.notifyDataSetChanged();
                     setAdapter(tempas);
                 }
                 else if(!asbox.isChecked() && vsbox.isChecked())
                 {
+                    adapter.notifyDataSetChanged();
                     setAdapter(tempvs);
                 }
                 else if(!asbox.isChecked() && !vsbox.isChecked())
                 {
+                    adapter.notifyDataSetChanged();
                     setAdapter(StreamerArrayList);
                 }
                 else if(asbox.isChecked() && vsbox.isChecked())
                 {
+                    adapter.notifyDataSetChanged();
                     setAdapter(temp);
                 }
             }
@@ -69,6 +74,7 @@ public class Dashboard extends Fragment {
         vsbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sort();
                 if (asbox.isChecked() && !vsbox.isChecked()) {
                     setAdapter(tempas);
                 }
@@ -105,24 +111,37 @@ public class Dashboard extends Fragment {
     }
 
     public void sort(){
-
+        tempas.clear();
+        tempvs.clear();
+        blocked();
             for (int i = 0; i < StreamerArrayList.size(); i++) {
                 if(StreamerArrayList.get(i).isVstreamer()&&StreamerArrayList.get(i).isAstreamer())
                 {
-                    temp.add(StreamerArrayList.get(i));
+                    if(!StreamerArrayList.get(i).isBlocked())
+                        temp.add(StreamerArrayList.get(i));
                 }
                 else if (StreamerArrayList.get(i).isVstreamer()) {
-                    tempvs.add(StreamerArrayList.get(i));
+                    if(!StreamerArrayList.get(i).isBlocked())
+                        tempvs.add(StreamerArrayList.get(i));
 
                 }
                 else if(StreamerArrayList.get(i).isAstreamer())
                 {
-                    tempas.add(StreamerArrayList.get(i));
+                    if(!StreamerArrayList.get(i).isBlocked())
+                        tempas.add(StreamerArrayList.get(i));
                 }
             }
         }
 
-
+public void blocked()
+{
+    for (int i = 0; i < StreamerArrayList.size(); i++) {
+        if(StreamerArrayList.get(i).isBlocked()) {
+            StreamerArrayList.remove(i);
+        }
+    }
+    adapter.notifyDataSetChanged();
+}
     public void setAdapter(ArrayList<Streamer> streamers)
     {
         adapter = new StreamerAdapter(this.getContext(), streamers);

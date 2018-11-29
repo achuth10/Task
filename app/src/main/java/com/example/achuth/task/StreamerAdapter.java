@@ -16,9 +16,8 @@ import java.util.ArrayList;
 public class StreamerAdapter extends RecyclerView.Adapter<StreamerAdapter.StreamerHolder>{
 
     private Context context;
-
-    public ArrayList<Streamer> streamers;
-    public int count=0;
+    private ArrayList<Streamer> streamers;
+    private int count=0;
 
 
 StreamerAdapter(Context context, ArrayList<Streamer> streamers) {

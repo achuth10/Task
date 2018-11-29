@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
     <item
         android:id="@+id/nav_dash"
         android:title="@string/dashboard"
@@ -9,5 +10,11 @@
         android:title="@string/membership_plans"
         android:icon="@drawable/member"
         />
+    </group>
 
+<group>
+    <item
+        android:title="Log out"
+        />
+</group>
 </menu>
