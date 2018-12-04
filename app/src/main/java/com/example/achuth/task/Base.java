@@ -47,8 +47,6 @@ public class Base extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
         editor= sharedPreferences.edit();
-
-
         dashboard=new Dashboard();
         membership =new Membership();
         setfragement(dashboard);

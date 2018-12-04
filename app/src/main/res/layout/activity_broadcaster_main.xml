@@ -5,12 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BroadcasterMain">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Place holder for Broadcaster dashboard"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        app:itemBackground="@color/colorend"
+        app:menu="@menu/bottomnav"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:id="@+id/bottom_nav"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainframe"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/bottom_nav"
         />
 </RelativeLayout>

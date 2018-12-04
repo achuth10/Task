@@ -11,10 +11,4 @@
         android:icon="@drawable/member"
         />
     </group>
-
-<group>
-    <item
-        android:title="Log out"
-        />
-</group>
 </menu>

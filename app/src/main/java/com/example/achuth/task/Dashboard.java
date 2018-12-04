@@ -27,7 +27,6 @@ public class Dashboard extends Fragment {
     private StreamerAdapter adapter;
     public ArrayList<Streamer> tempas,tempvs,temp;
     public ArrayList<Streamer> StreamerArrayList;
-    private ImageView menu;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class Dashboard extends Fragment {
         tempvs=new ArrayList<>();
         asbox.setChecked(false);
         vsbox.setChecked(false);
-        menu=(ImageView)v.findViewById(R.id.streammenu);
         setAdapter(StreamerArrayList);
         createdata();
 
@@ -51,22 +49,18 @@ public class Dashboard extends Fragment {
             public void onClick(View v) {
                 sort();
                 if (asbox.isChecked() && !vsbox.isChecked()) {
-                    adapter.notifyDataSetChanged();
                     setAdapter(tempas);
                 }
                 else if(!asbox.isChecked() && vsbox.isChecked())
                 {
-                    adapter.notifyDataSetChanged();
                     setAdapter(tempvs);
                 }
                 else if(!asbox.isChecked() && !vsbox.isChecked())
                 {
-                    adapter.notifyDataSetChanged();
                     setAdapter(StreamerArrayList);
                 }
                 else if(asbox.isChecked() && vsbox.isChecked())
                 {
-                    adapter.notifyDataSetChanged();
                     setAdapter(temp);
                 }
             }
@@ -131,6 +125,7 @@ public class Dashboard extends Fragment {
                         tempas.add(StreamerArrayList.get(i));
                 }
             }
+            adapter.notifyDataSetChanged();
         }
 
 public void blocked()

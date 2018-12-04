@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BroadcasterDash">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+<TextView
+    android:padding="@dimen/_8sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/viewerdemo"
+    android:text="Viewer Demographic"
+    android:textSize="@dimen/_20sdp"
+    android:layout_centerHorizontal="true"
+    />
+       <com.anychart.AnyChartView
+           android:layout_centerHorizontal="true"
+           android:padding="@dimen/_8sdp"
+           android:layout_below="@id/viewerdemo"
+           android:id="@+id/any_chart_view"
+           android:layout_width="@dimen/_250sdp"
+           android:layout_height="@dimen/_250sdp"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/_20sdp"
+           android:layout_below="@id/any_chart_view"
+           android:text="More info coming below"
+           android:layout_centerHorizontal="true"
+           />
+   </RelativeLayout>
+</FrameLayout>
