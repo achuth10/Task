@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -17,17 +18,23 @@ import android.widget.Toast;
 
 public class BroadcasterMain extends AppCompatActivity {
     private int count = 0;
+    private int height;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     BottomNavigationView bottomNavigationView;
     private BroadcasterAccount broadcasterAccount;
     private BroadcasterViewer broadcasterviewer;
     private BroadcasterDash broadcasterDash;
+    private int Measuredwidth, Measuredheight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcaster_main);
+        DisplayMetrics metrics = new DisplayMetrics();   //for all android versions
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+         Measuredwidth  = metrics.widthPixels;
+         Measuredheight = metrics.heightPixels;
         broadcasterAccount= new BroadcasterAccount();
         broadcasterDash=new BroadcasterDash();
         broadcasterviewer=new BroadcasterViewer();
@@ -81,6 +88,23 @@ public class BroadcasterMain extends AppCompatActivity {
         fragmentTransaction.replace(R.id.mainframe,fragment);
         fragmentTransaction.commit();
 
+    }
+    public void setNavigationVisibility(boolean visible) {
+        if (bottomNavigationView.isShown() && !visible) {
+            bottomNavigationView.setVisibility(View.GONE);
+        }
+        else if (!bottomNavigationView.isShown() && visible){
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
+    }
+    private void slideUp(BottomNavigationView child) {
+        child.clearAnimation();
+        child.animate().translationY(0).setDuration(200);
+    }
+
+    private void slideDown(BottomNavigationView child) {
+        child.clearAnimation();
+        child.animate().translationY(Measuredheight).setDuration(200);
     }
 }
 
