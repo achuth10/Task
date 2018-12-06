@@ -11,7 +11,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+<android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,21 +21,69 @@
             app:expandedTitleMarginEnd="64dp"
             android:fitsSystemWindows="true">
 
-            <ImageView
-                android:id="@+id/image"
-                android:src="@drawable/account"
+            <RelativeLayout
+                android:id="@+id/imageFrame"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_250sdp"
-                android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"/>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_4sdp">
+
+                <ImageView
+                    android:id="@+id/icon1"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/blank" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/icon1">
+
+                    <TextView
+                        android:id="@+id/totmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:text="Total number of minutes watched: 90,000"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/mostWatched"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/totmin"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:padding="@dimen/_4sdp"
+                        android:text="Users watching right now : 24,000"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/watchtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mostWatched"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="Average watch time : 5.3 minutes"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10sdp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -51,6 +99,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Dashboard"
+            android:textSize="@dimen/_20sdp"
+            android:padding="@dimen/_8sdp"
+            android:textColor="#000000"
+            />
+    </RelativeLayout>
+
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -69,17 +132,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/title"
-                            android:gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Dashboard"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
                         <com.github.mikephil.charting.charts.BarChart
-                            android:layout_below="@id/title"
                             android:padding="@dimen/_4sdp"
                             android:layout_width="@dimen/_250sdp"
                             android:layout_height="@dimen/_250sdp"

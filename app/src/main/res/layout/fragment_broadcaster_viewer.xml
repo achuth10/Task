@@ -6,10 +6,17 @@
     tools:context=".BroadcasterViewer">
     <TextView
         android:layout_width="wrap_content"
+        android:padding="@dimen/_8sdp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textColor="#000"
-        android:layout_centerVertical="true"
-        android:text="Placeholder for the list of viewers and report users"
-        />
+        android:id="@+id/textview"
+        android:text="Recent Viewers"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewBroadcaster"
+        android:layout_below="@id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        >
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

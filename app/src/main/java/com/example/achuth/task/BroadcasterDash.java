@@ -2,6 +2,7 @@ package com.example.achuth.task;
 
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
@@ -48,6 +49,7 @@ public class BroadcasterDash extends Fragment {
         values.add("August");
         values.add("September");
         xAxis.setValueFormatter(new MyXAxisValueFormatter(values));
+        xAxis.setGranularity(1f);
 
         entries.add(new BarEntry(0f, 30f));
         entries.add(new BarEntry(1f, 80f));
@@ -68,13 +70,21 @@ public class BroadcasterDash extends Fragment {
         chart.setFitBars(true);
         chart.animateXY(3000, 3000,Easing.EaseInOutExpo); // animate horizontal and vertical 3000 milliseconds
 
-
-
-        PieDataSet pieDataSet =new PieDataSet(pieEntries,"Viewer Demographic");
+        PieDataSet pieDataSet =new PieDataSet(pieEntries,"");
         pieDataSet.setColors(setColors,getContext());
         PieData pieData= new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.getDescription().setText("Lifetime Viewership");
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        pieChart.setCenterText("Viewer Demographic");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleColor(Color.WHITE);
+        pieChart.setTransparentCircleAlpha(110);
+        pieChart.setHoleRadius(58f);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setDrawCenterText(true);
         pieChart.animateXY(3000,3000,Easing.EaseInOutExpo);
 
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
