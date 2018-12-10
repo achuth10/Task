@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +10,13 @@
         android:padding="@dimen/_8sdp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20sdp"
         android:id="@+id/textview"
         android:text="Recent Viewers"/>
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/_8sdp"
         android:id="@+id/recyclerViewBroadcaster"
         android:layout_below="@id/textview"
         android:layout_width="match_parent"

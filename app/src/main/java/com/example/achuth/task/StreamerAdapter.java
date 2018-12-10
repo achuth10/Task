@@ -45,13 +45,13 @@ StreamerAdapter(Context context, ArrayList<Streamer> streamers) {
     }
 
     private void delete(int position) { //removes the row
-        Toast.makeText(context, "Press again to report user", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Press again to block user", Toast.LENGTH_SHORT).show();
         if (++count>=2) {
             Streamer streamer =streamers.get(position);
             streamers.remove(position);
             streamer.setBlocked(true);
             notifyItemRemoved(position);
-            Toast.makeText(context,"Blocked Streamer for current session",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Streamer blocked for current session",Toast.LENGTH_LONG).show();
         }new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -64,8 +64,7 @@ StreamerAdapter(Context context, ArrayList<Streamer> streamers) {
     }
     public class StreamerHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView Name, Age, Genre, TypeStreamer;
-        public ImageView dp;
-        public ImageView menu;
+        public ImageView dp,menu,live;
         public StreamerHolder(final View itemView) {
             super(itemView);
             Name=itemView.findViewById(R.id.Name);
@@ -73,6 +72,7 @@ StreamerAdapter(Context context, ArrayList<Streamer> streamers) {
             Genre=itemView.findViewById(R.id.Genre);
             dp=itemView.findViewById(R.id.icon1);
             menu=itemView.findViewById(R.id.streammenu);
+            live=itemView.findViewById(R.id.live);
             menu.setOnClickListener(this);
             TypeStreamer=itemView.findViewById(R.id.TypeStreamer);
         }
@@ -82,6 +82,8 @@ StreamerAdapter(Context context, ArrayList<Streamer> streamers) {
                 Age.setText("Age:" + String.valueOf(streamer.getAge()));
                 Genre.setText("Genre:" + streamer.getGenre());
                 dp.setImageResource(streamer.getDpid());
+                if(streamer.isLive())
+                    live.setImageResource(R.drawable.liveround);
                 if (streamer.isAstreamer() && streamer.isVstreamer())
                     TypeStreamer.setText("Streamer Type:Audio/Video Streamer");
                 else if (streamer.isAstreamer())

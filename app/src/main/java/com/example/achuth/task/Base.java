@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,7 +20,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 
 
@@ -37,7 +35,6 @@ public class Base extends AppCompatActivity {
     private Dashboard dashboard;
     private Membership membership;
     private int count=0;
-    private User user;
     private Gson gson;
     private String storeduser;
     private FrameLayout mainframe;
@@ -62,9 +59,7 @@ public class Base extends AppCompatActivity {
         gson=new Gson();
         if(sharedPreferences.getString("UserDetail",null)!=null) {
             storeduser = sharedPreferences.getString("UserDetail", null);
-            System.out.println(storeduser);
             User temp=gson.fromJson(storeduser,User.class);
-            user = gson.fromJson(storeduser, User.class);
             if (temp != null) {
                 View headerView = navview.getHeaderView(0);
                 name = (TextView) headerView.findViewById(R.id.logininfo);

@@ -26,7 +26,6 @@ import java.util.List;
 
 public class BroadcasterDash extends Fragment {
     private ArrayList <String> values=new ArrayList<>();
-     SharedPreferences.Editor editor;
     List<BarEntry> entries ;
     List<PieEntry> pieEntries;
     NestedScrollView nestedScrollView;
@@ -112,4 +111,5 @@ public class BroadcasterDash extends Fragment {
 
         return v;
     }
+
 }

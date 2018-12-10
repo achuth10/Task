@@ -47,7 +47,7 @@ public class BroadcasterMain extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.account:
-                        bottomNavigationView.setItemBackgroundResource(R.color.colorAccent);
+                        bottomNavigationView.setItemBackgroundResource(R.color.colorend);
                         setfragment(broadcasterAccount);
                         return true;
                     case R.id.dashboard:

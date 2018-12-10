@@ -1,15 +1,17 @@
 package com.example.achuth.task;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class ViewerAdapter extends RecyclerView.Adapter <ViewerAdapter.ViewerHolder> {
@@ -30,6 +32,21 @@ public class ViewerAdapter extends RecyclerView.Adapter <ViewerAdapter.ViewerHol
     public void onBindViewHolder(@NonNull ViewerAdapter.ViewerHolder viewerHolder, int i) {
         Viewer viewer=viewers.get(i);
         viewerHolder.setinfo(viewer);
+//        viewerHolder.view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context,"clicked",Toast.LENGTH_LONG).show();
+//                Intent i =new Intent(context,StreamerPage.class);
+//                Log.i("View pressed","Herere");
+//                context.startActivity(i);
+//            }
+//        });
+//        viewerHolder.dp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context,"clicked",Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
     @Override
@@ -38,13 +55,13 @@ public class ViewerAdapter extends RecyclerView.Adapter <ViewerAdapter.ViewerHol
     }
 
     private void delete(int position) { //removes the row
-        Toast.makeText(context, "Press again to report user", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Press again to block user", Toast.LENGTH_SHORT).show();
         if (++count >= 2) {
             Viewer viewer = viewers.get(position);
             viewers.remove(position);
             viewer.setBlocked(true);
             notifyItemRemoved(position);
-            Toast.makeText(context, "Blocked Viewer for current session", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Viewer blocked  for current session", Toast.LENGTH_LONG).show();
         }
         new Handler().postDelayed(new Runnable() {
 
@@ -57,11 +74,13 @@ public class ViewerAdapter extends RecyclerView.Adapter <ViewerAdapter.ViewerHol
 
      public class ViewerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView Name, Age,location;
+         public View view;
         public ImageView dp;
         public ImageView menu;
 
         public ViewerHolder(final View itemView) {
             super(itemView);
+            view=itemView;
             Name = itemView.findViewById(R.id.Name);
             Age = itemView.findViewById(R.id.Age);
             dp = itemView.findViewById(R.id.icon1);

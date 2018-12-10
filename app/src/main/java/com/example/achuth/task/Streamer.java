@@ -3,9 +3,9 @@ package com.example.achuth.task;
 public class Streamer {
     private String name,genre;
     private int age,dpid;
-    private boolean vstreamer,astreamer,blocked;
+    private boolean vstreamer,astreamer,blocked,live;
 
-    Streamer(String name,String genre,int age,boolean vs,boolean as,int dpid)
+    Streamer(String name,String genre,int age,boolean vs,boolean as,int dpid,boolean live)
     {
         this.name=name;
         this.genre=genre;
@@ -13,6 +13,7 @@ public class Streamer {
         vstreamer=vs;
         astreamer=as;
         blocked=false;
+        this.live=live;
         this.dpid=dpid;
     }
 
@@ -70,5 +71,13 @@ public class Streamer {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
     }
 }
