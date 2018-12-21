@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.achuth.task">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +21,8 @@
         <activity android:name=".Base" />
         <activity android:name=".SignUpUser" />
         <activity android:name=".BroadcasterMain" />
-        <activity android:name=".StreamerPage"></activity>
-
+        <activity android:name=".StreamerPage" />
+        <activity android:name=".EmailPassword"></activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

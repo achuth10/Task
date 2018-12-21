@@ -2,6 +2,7 @@ package com.example.achuth.task;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 public class SignUpUser extends AppCompatActivity {
@@ -17,13 +24,15 @@ public class SignUpUser extends AppCompatActivity {
     private User user;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private DatabaseReference mDatabase;
+    FirebaseAuth firebaseAuth;
     private int pressbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_user);
-        sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
-        final SharedPreferences.Editor editor= sharedPreferences.edit();
+        firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         email=(EditText)findViewById(R.id.getemailuser);
         signup=(Button)findViewById(R.id.signupbutton) ;
         pass=(EditText)findViewById(R.id.getpassuser);
@@ -61,22 +70,22 @@ public class SignUpUser extends AppCompatActivity {
                     Toast.makeText(getApplication(),"Please enter your last name",Toast.LENGTH_SHORT).show();
                 }
                 else
-                {
-                    user.setFirstName(firstName.getText().toString());
-                    user.setLastName(lastname.getText().toString());
-                    user.setLoginId(email.getText().toString());
-                    user.setPassword(pass.getText().toString());
-                    if(pressbutton==2)
-                        user.setUser(true);
-                    else {
-                        user.setUser(false);
+                        firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(SignUpUser.this ,new OnCompleteListener() {
+                            @Override
+                            public void onComplete( Task task) {
 
-                    }
-                    editor.putString("UserDetail",gson.toJson(user)).apply();
-                    editor.putString("Login","YES").apply();
-                    Toast.makeText(getApplication(),"Account created successfully ",Toast.LENGTH_SHORT).show();
-                    changepage();
-                }
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(SignUpUser.this.getApplicationContext(),
+                                            "SignUp unsuccessful: " + task.getException().getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    FirebaseUser user =  firebaseAuth.getCurrentUser();
+                                    String userId = user.getUid();
+                                    writeNewUser(email.getText().toString(),firstName.getText().toString(),userId,true);
+                                    startActivity(new Intent(SignUpUser.this, Base.class));
+                                }
+                            }
+                        });
             }
         });
     }
@@ -88,6 +97,12 @@ public class SignUpUser extends AppCompatActivity {
         else
             i= new Intent(this, BroadcasterMain.class);
         startActivity(i);
-    }
 
+    }
+    private void writeNewUser(String email, String name, String userId,Boolean isUser) {
+        User user = new User(email,name,isUser);
+        mDatabase.child("Users").child(userId).setValue(user);
+        mDatabase.push();
+
+    }
 }

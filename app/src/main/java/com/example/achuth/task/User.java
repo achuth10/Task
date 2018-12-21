@@ -7,6 +7,12 @@ public class User {
     {
         uuid=firstName=lastName=loginId=password=" ";isUser=true;
     }
+    User(String loginId ,String firstName,Boolean isUser)
+    {
+        this.loginId=loginId;
+        this.firstName=firstName;
+        this.isUser=isUser;
+    }
 
     public String getFirstName() {
         return firstName;
