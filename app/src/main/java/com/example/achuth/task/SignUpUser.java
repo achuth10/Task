@@ -50,22 +50,27 @@ public class SignUpUser extends AppCompatActivity {
                 if(email.getText().toString().length()==0)
                 {
                     Toast.makeText(getApplication(),"Enter a valid email id",Toast.LENGTH_SHORT).show();
+                    email.requestFocus();
                 }
                 else if(pass.getText().toString().length()<=4)
                 {
                     Toast.makeText(getApplication(),"Enter a valid password",Toast.LENGTH_SHORT).show();
+                    pass.requestFocus();
                 }
                 else if(passConfirm.getText().toString().length()==0 || ! passConfirm.getText().toString().equals(pass.getText().toString()))
                 {
                     Toast.makeText(getApplication(),"Please confirm your password",Toast.LENGTH_SHORT).show();
+                    passConfirm.requestFocus();
                 }
                 else if(firstName.getText().toString().length()==0)
                 {
                     Toast.makeText(getApplication(),"Please enter your first name",Toast.LENGTH_SHORT).show();
+                    firstName.requestFocus();
                 }
                 else if(lastname.getText().toString().length()==0)
                 {
                     Toast.makeText(getApplication(),"Please enter your last name",Toast.LENGTH_SHORT).show();
+                    lastname.requestFocus();
                 }
                 else
                         firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(SignUpUser.this ,new OnCompleteListener() {

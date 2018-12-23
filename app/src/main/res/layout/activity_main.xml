@@ -48,6 +48,7 @@
         android:layout_marginEnd="@dimen/_70sdp"
         android:ems="10"
         android:hint="@string/password"
+        android:imeOptions="actionDone"
         android:inputType="textPassword" />
 
     <Button
