@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
         private Button login;
         private EditText loginid,password;
@@ -36,50 +39,33 @@ public class MainActivity extends AppCompatActivity {
         private RelativeLayout relativeLayout;
         private AnimationDrawable animationDrawable;
         private SignUpFragment signUpFragment ;
-        private FragmentManager fragman;
-        private TextView signup;
+        private FragmentManager fragman;private TextView signup;
         ProgressDialog progressDialog;
+        ProgressBar progressBar;
+
     private DatabaseReference mDatabase;
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     private FirebaseAuth.AuthStateListener authStateListener;
 
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+        progressBar = findViewById(R.id.progress);
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         loginid= findViewById(R.id.getemail);
         password= findViewById(R.id.getpassword);
         login= findViewById(R.id.loginbutton);
-        signup=(TextView)findViewById(R.id.signup);
+        signup= findViewById(R.id.signup);
         signUpFragment =new SignUpFragment();
 
         fragman=getSupportFragmentManager();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        onAuthSuccess(user);
-        if (user != null) {
-            onAuthSuccess(user);
-            Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-            Intent I = new Intent(MainActivity.this, Base.class);
-            startActivity(I);
-        }
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-               // onAuthSuccess(user);
-                if (user != null) {
-                    Toast.makeText(MainActivity.this, "User logged in ", Toast.LENGTH_SHORT).show();
-                    Intent I = new Intent(MainActivity.this, Base.class);
-                    startActivity(I);
-                } else {
-                    Toast.makeText(MainActivity.this, "Login to continue", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        //code for animation transition
-        relativeLayout = (RelativeLayout) findViewById(R.id.mainframe);
+         user = firebaseAuth.getCurrentUser();
+
+        //code for transition animation
+        relativeLayout = findViewById(R.id.mainframe);
         animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
@@ -91,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
              login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                progressDialog.show();
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.VISIBLE);
                 String logintest = loginid.getText().toString(), passtest = password.getText().toString();
                 if (logintest.length() > 0 && passtest.length() > 0) {
                     firebaseAuth.signInWithEmailAndPassword(logintest, passtest).addOnCompleteListener(MainActivity.this, new OnCompleteListener() {
@@ -101,16 +86,19 @@ public class MainActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                             } else {
-                                startActivity(new Intent(MainActivity.this, Base.class));
+//                                startActivity(new Intent(MainActivity.this, Base.class));
+                                FirebaseUser user1 = firebaseAuth.getCurrentUser();
+                                onAuthSuccess(user1);
                             }
                         }
                     });
-
                     progressDialog.dismiss();
                 } else if (logintest.length() == 0) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplication(), "Please enter a valid username", Toast.LENGTH_SHORT).show();
                     login.requestFocus();
                 } else if (passtest.length() == 0) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplication(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
                     password.requestFocus();
                 }
@@ -136,36 +124,45 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (user != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            onAuthSuccess(user);
+           }
+    }
+
     private void setfragement(Fragment frag) {
         fraginplace=true;
         FragmentTransaction fragmentTransaction = fragman.beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.mainframe, frag).addToBackStack("Frag").commit();
     }
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onAuthSuccess(final FirebaseUser user) {
 
-        //String username = usernameFromEmail(user.getEmail())
         if (user != null) {
-            //Toast.makeText(signinActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+            System.out.println(user.getUid());
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    String value = (String) dataSnapshot.getValue(Boolean.parseBoolean("isUser"));
-                    Log.i("inside fn  "," " + value);
-                    //for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                     Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
-//                    if(Boolean.(value) == 1) {
-//                        //String jason = (String) snapshot.getValue();
-//                        //Toast.makeText(signinActivity.this, jason, Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(signinActivity.this, MainActivity.class));
-//                        Toast.makeText(signinActivity.this, "You're Logged in as Seller", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    } else {
-//                        startActivity(new Intent(signinActivity.this, BuyerActivity.class));
-//                        Toast.makeText(signinActivity.this, "You're Logged in as Buyer", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
+                    DataSnapshot contactSnapshot = dataSnapshot.child("Users");
+                    Iterable<DataSnapshot> contactChildren = contactSnapshot.getChildren();
+                    for (DataSnapshot contact : contactChildren) {
+                        User c = contact.getValue(User.class);
+                        if(contact.getKey().equals(user.getUid()))
+                        {
+                            progressBar.setVisibility(View.GONE);
+                                changepage(c.getType());
+                                Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+
+                            break;
+                        }
+                    }
+
                 }
 
                 @Override
@@ -176,5 +173,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private void changepage(int a)
+    {
+        Intent i;
+        if(a==2)
+            i= new Intent(this, Base.class);
+        else
+            i= new Intent(this, BroadcasterMain.class);
+        startActivity(i);
 
+    }
 }

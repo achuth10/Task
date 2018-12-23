@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,34 +22,31 @@ import com.google.gson.Gson;
 public class SignUpUser extends AppCompatActivity {
     private EditText email,pass,passConfirm,firstName,lastname;
     private Button signup;
-    private User user;
-    private SharedPreferences sharedPreferences;
-    private Gson gson;
     private DatabaseReference mDatabase;
     FirebaseAuth firebaseAuth;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     private int pressbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_user);
+        sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
+        editor=sharedPreferences.edit();
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        email=(EditText)findViewById(R.id.getemailuser);
-        signup=(Button)findViewById(R.id.signupbutton) ;
-        pass=(EditText)findViewById(R.id.getpassuser);
-        passConfirm=(EditText)findViewById(R.id.getpassconfirm);
-        user=new User();
-        gson=new Gson();
+        email= findViewById(R.id.getemailuser);
+        signup= findViewById(R.id.signupbutton);
+        pass= findViewById(R.id.getpassuser);
+        passConfirm= findViewById(R.id.getpassconfirm);
         pressbutton=getIntent().getIntExtra("Buttonpressed",0);
-        firstName=(EditText)findViewById(R.id.getfirstname);
-        lastname=(EditText)findViewById(R.id.getlastname);
+        firstName= findViewById(R.id.getfirstname);
+        lastname= findViewById(R.id.getlastname);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(pressbutton);
-                if(pressbutton!=2)
-                    Toast.makeText(getApplication(),"Broadcaster clicked",Toast.LENGTH_SHORT).show();
                 if(email.getText().toString().length()==0)
                 {
                     Toast.makeText(getApplication(),"Enter a valid email id",Toast.LENGTH_SHORT).show();
@@ -57,7 +55,7 @@ public class SignUpUser extends AppCompatActivity {
                 {
                     Toast.makeText(getApplication(),"Enter a valid password",Toast.LENGTH_SHORT).show();
                 }
-                else if(passConfirm.getText().toString().length()==0 || !passConfirm.getText().toString().equals(pass.getText().toString()))
+                else if(passConfirm.getText().toString().length()==0 || ! passConfirm.getText().toString().equals(pass.getText().toString()))
                 {
                     Toast.makeText(getApplication(),"Please confirm your password",Toast.LENGTH_SHORT).show();
                 }
@@ -81,8 +79,12 @@ public class SignUpUser extends AppCompatActivity {
                                 } else {
                                     FirebaseUser user =  firebaseAuth.getCurrentUser();
                                     String userId = user.getUid();
-                                    writeNewUser(email.getText().toString(),firstName.getText().toString(),userId,true);
-                                    startActivity(new Intent(SignUpUser.this, Base.class));
+                                    editor.putString("Name",firstName.getText().toString() + " " + lastname.getText().toString()).apply();
+                                    if(pressbutton==2)
+                                        writeNewUser(email.getText().toString(),firstName.getText().toString(),userId,2);
+                                    else
+                                        writeNewUser(email.getText().toString(),firstName.getText().toString(),userId,1);
+                                    changepage();
                                 }
                             }
                         });
@@ -99,8 +101,8 @@ public class SignUpUser extends AppCompatActivity {
         startActivity(i);
 
     }
-    private void writeNewUser(String email, String name, String userId,Boolean isUser) {
-        User user = new User(email,name,isUser);
+    private void writeNewUser(String email, String name, String userId,int checker) {
+        User user = new User(name,checker);
         mDatabase.child("Users").child(userId).setValue(user);
         mDatabase.push();
 

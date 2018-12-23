@@ -26,8 +26,6 @@ import com.google.gson.Gson;
 
 
 public class Base extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     private boolean open=false;
     private TextView name;
     private DrawerLayout drawerLayout;
@@ -37,15 +35,13 @@ public class Base extends AppCompatActivity {
     private Dashboard dashboard;
     private Membership membership;
     private int count=0;
-    private Gson gson;
-    private String storeduser;
-    private FrameLayout mainframe;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        sharedPreferences=getApplicationContext().getSharedPreferences("UserInfo",0);
-        editor= sharedPreferences.edit();
+        sharedPreferences = getApplicationContext().getSharedPreferences("UserInfo",0);
         dashboard=new Dashboard();
         membership =new Membership();
         setfragement(dashboard);
@@ -58,16 +54,12 @@ public class Base extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         navview = findViewById(R.id.nav_view);
-        gson=new Gson();
-        if(sharedPreferences.getString("UserDetail",null)!=null) {
-            storeduser = sharedPreferences.getString("UserDetail", null);
-            User temp=gson.fromJson(storeduser,User.class);
-            if (temp != null) {
+
                 View headerView = navview.getHeaderView(0);
-                name = (TextView) headerView.findViewById(R.id.logininfo);
-                name.setText(temp.getFirstName() + " " + temp.getLastName());
-            }
-        }
+                String s= sharedPreferences.getString("Name","John Doe");
+                name = headerView.findViewById(R.id.logininfo);
+                name.setText(s);
+
         navview.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -103,7 +95,6 @@ public class Base extends AppCompatActivity {
             Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
             if (++count>=2) {
                 FirebaseAuth.getInstance().signOut();
-                editor.putString("Login","NO").commit();
                 super.onBackPressed();
             }
         }
@@ -124,7 +115,6 @@ public class Base extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout_action:
                 FirebaseAuth.getInstance().signOut();
-                editor.putString("Login","NO").commit();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 return true;

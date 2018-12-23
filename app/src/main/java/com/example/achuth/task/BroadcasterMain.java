@@ -15,22 +15,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class BroadcasterMain extends AppCompatActivity {
     private int count = 0;
-    private int height;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     BottomNavigationView bottomNavigationView;
     private BroadcasterAccount broadcasterAccount;
     private BroadcasterViewer broadcasterviewer;
     private BroadcasterDash broadcasterDash;
+    FirebaseAuth firebaseAuth;
     private int Measuredwidth, Measuredheight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcaster_main);
+
         DisplayMetrics metrics = new DisplayMetrics();   //for all android versions
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
          Measuredwidth  = metrics.widthPixels;
@@ -38,7 +39,7 @@ public class BroadcasterMain extends AppCompatActivity {
         broadcasterAccount= new BroadcasterAccount();
         broadcasterDash=new BroadcasterDash();
         broadcasterviewer=new BroadcasterViewer();
-        bottomNavigationView=(BottomNavigationView)findViewById(R.id.bottom_nav);
+        bottomNavigationView= findViewById(R.id.bottom_nav);
         setfragment(broadcasterDash);
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
         bottomNavigationView.setItemBackgroundResource(R.color.colorbegin);
@@ -63,15 +64,13 @@ public class BroadcasterMain extends AppCompatActivity {
                 }
             }
         });
-        sharedPreferences = getApplicationContext().getSharedPreferences("UserInfo", 0);
-        editor = sharedPreferences.edit();
     }
 
     public void onBackPressed() {
 
         Toast.makeText(this, "Press again to log out", Toast.LENGTH_SHORT).show();
         if (++count >= 2) {
-            editor.putString("Login", "NO").commit();
+            FirebaseAuth.getInstance().signOut();
             super.onBackPressed();
         }
         new Handler().postDelayed(new Runnable() {
